@@ -41,25 +41,20 @@ if (hobbyFormElement) {
     e.preventDefault();
     const hobbyTextElement = hobbyFormElement.querySelector("#hobbyTextId");
     if (!hobbyTextElement) return;
-
-    console.log("SUBMIT", hobbyTextElement.value);
-
     const action = {
       type: "ADD_HOBBY",
       payload: hobbyTextElement.value,
-    };
-    store.dispatch(action);
+    }; 
+    // chạy đến hobbyReducer để xử lí action
+    store.dispatch(action); 
     hobbyFormElement.reset();
   };
 
   hobbyFormElement.addEventListener("submit", handleFormSubmit);
 }
-
 // Render initial Hobby List
 renderHobbyList(store.getState());
-
-// Subscribe to state changes
-// Lắng nghe sự thay đổi khi state thay đổi thì thực hiện một hành động gì đó
+// Lắng nghe sự thay đổi state trong ở trong hàm hobbyReducer
 store.subscribe(() => {
   const updatedHobbyList = store.getState();
   renderHobbyList(updatedHobbyList);
